@@ -43,5 +43,5 @@ jobs:
       with:
           tag: Release-${{ github.run_number  }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: dist/NPlib-weekly.jar
-          asset_name: NPlib-Weekly  
+          file: dist/NPlib-release.jar
+          asset_name: NPlib-Relaease

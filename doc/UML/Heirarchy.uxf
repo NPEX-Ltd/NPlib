@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>660</x>
+      <y>0</y>
+      <w>590</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>np.library.testing::Tester
+--
+--
++Test(Class&lt;?&gt; clazz): boolean
++Fail(String message): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>810</x>
+      <y>120</y>
+      <w>300</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>np.library.testing::TestFailedSignal
+--
+--
++TestFailedSignal(String message): ctor
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>20</y>
+      <w>270</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>np.library.testing.tests::TestingMain
+--
+--
++main(String[] args): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>240</x>
+      <y>120</y>
+      <w>550</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>np.library.testing.tests::LoggerTests
+--
+~logger = np.library.common.Logger.CreateNew(LoggerTests.class): Logger
+--
++TestInfo(): void
++TestDebug(): void
++TestWarn(): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>260</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>np.library.common::Time
+--
+--
++SleepMillis(int millis): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>360</x>
+      <y>260</y>
+      <w>280</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>/np.library.common::Logger/
+--
+#name: String
+#formatter: StringFormatter
+--
+#Logger(String name): ctor
+#Logger(Class&lt;?&gt; clazz): ctor
++Info(Object... args): void
++Debug(Object... args): void
++Warn(Object... args): void
++CreateNew(Class&lt;?&gt; clazz): Logger
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>370</x>
+      <y>470</y>
+      <w>260</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>np.library.common::LoggerImpl
+--
+--
+#LoggerImpl(String name): ctor
+#LoggerImpl(Class&lt;?&gt; clazz): ctor
++Info(Object... args): void
++Debug(Object... args): void
++Warn(Object... args): void
+-Print(Object... args): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>210</x>
+      <y>650</y>
+      <w>550</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>/np.library.common.strings::StringFormatter/
+--
+-formatters = new HashMap&lt;String, Formatter&gt;(): Map&lt;String, Formatter&gt;
+-defaultFormatter = new Formatter() {
+
+    @Override
+    public String replace(String key, Object... args) {
+        return key;
+    }
+}: Formatter
+--
++Format(String format, Object... args): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1130</x>
+      <y>120</y>
+      <w>200</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>np.library.common::Timer
+--
+-start, end: long
+--
++Start(): void
++Stop(): float
++GetTimeSeconds(): float
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>460</x>
+      <y>80</y>
+      <w>30</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>230</y>
+      <w>30</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;30.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>440</y>
+      <w>30</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;30.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>830</x>
+      <y>80</y>
+      <w>30</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1160</x>
+      <y>80</y>
+      <w>30</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>470</x>
+      <y>620</y>
+      <w>30</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;30.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"np.library.common"},{"l":"np.library.common.strings"},{"l":"np.library.exceptions"},{"l":"np.library.io"},{"l":"np.library.testing"},{"l":"np.library.testing.tests"}]

@@ -42,4 +42,4 @@ jobs:
           tag: Release-${{ github.run_number  }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: dist/NPlib-release.jar
-          asset_name: NPlib-Relaease
+          asset_name: NPlib-Release.jar

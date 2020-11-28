@@ -40,6 +40,7 @@ jobs:
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
+          tag: Build-${{ github.run_number  }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: dist/NPlib-weekly.jar
-          asset_name: NPlib-Weekly
+          asset_name: NPlib-Weekly  

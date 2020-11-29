@@ -2,6 +2,7 @@ package np.library.testing.tests;
 
 import java.io.File;
 
+import np.library.exceptions.DeviceOpenException;
 import np.library.io.FileIO;
 import np.library.io.IODevice;
 import np.library.io.SystemIO;
@@ -12,7 +13,6 @@ public class DeviceTests {
 	@Test
 	@SuppressWarnings("resource")
 	public void testSystemIO() {
-		
 		IODevice io = new SystemIO();
 		io.WriteString("Hello From SystemIO");
 		io.Close();
@@ -23,7 +23,20 @@ public class DeviceTests {
 		IODevice io = new FileIO(new File("resources/file.txt"));
 		io.WriteString("Hello From FileIO");
 		String received = io.ReadStringOrBlock();
-		if(!received.equals("Hello From FileIO")) Tester.Fail("io.ReadStringOrBlock() Returned Null...");
+		if(!received.equals("Hello From FileIO")) {
+			Tester.Fail("io.ReadStringOrBlock() Returned Incorrect Value...");
+		}
+		io.Close();
+	}
+	
+	@Test
+	public void testReadFromBadDirectory() throws DeviceOpenException {
+		IODevice io = new FileIO(new File("sources/file.txt"));
+		io.WriteString("Hello From FileIO");
+		String received = io.ReadStringOrBlock();
+		if(!received.equals("Hello From FileIO")) {
+			Tester.Fail("io.ReadStringOrBlock() Returned Incorrect Value...");
+		}
 		io.Close();
 	}
 }

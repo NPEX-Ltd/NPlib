@@ -9,18 +9,8 @@ import np.library.testing.Tester;
 public class TestingMain {
 
 	public static void main(String[] args) {
-		if(Tester.Test(LoggerTests.class)) System.out.println("LoggerTests Passed!");
-		FileWatcher watcher = null;
-		try {
-			watcher = new TestFileWatcher();
-			watcher.RegisterDir(new File("resources/"));
-			watcher.StartPollingForEvents();
-		} catch(IOException ioex) {
-			Tester.Fail("An IOException has occurred...");
-		}
-		if(Tester.Test(DeviceTests.class)) System.out.println("DeviceTests Passed!");
-		
-		watcher.StopPolling();
+		Tester.Test(LoggerTests.class);
+		Tester.Test(DeviceTests.class);
 	}
 	
 	public static class TestFileWatcher extends FileWatcher {

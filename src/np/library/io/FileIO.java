@@ -13,48 +13,25 @@ import np.library.exceptions.DeviceReadException;
 import np.library.exceptions.DeviceWriteException;
 
 public class FileIO extends IODevice {
-	private BufferedReader fileReader;
-	private BufferedWriter fileWriter;
+	private BufferedDevice device;
+	
 	public FileIO(File file) {
-		try {
-			file.createNewFile();
-			
-			fileReader = new BufferedReader(new FileReader(file));
-			fileWriter = new BufferedWriter(new FileWriter(file));
-		} catch (IOException ioex) {
-			throw new DeviceOpenException();
-		}
-		
+		device = BufferedDevice.Create(file);
 	}
 	
 	@Override
 	public void WriteString(String message) {
-		try {
-			fileWriter.write(message);
-			fileWriter.newLine();
-			fileWriter.flush();
-		} catch (IOException ioex) {
-			throw new DeviceWriteException();
-		}
+		device.WriteString(message);
 	}
 
 	@Override
 	public String ReadStringOrBlock() {
-		try {
-			return fileReader.readLine();
-		} catch (IOException ioex) {
-			throw new DeviceReadException();
-		}
+		return device.ReadStringOrBlock();
 	}
 	
 	@Override
 	public void Close() {
-		try {
-			fileReader.close();
-			fileWriter.close();
-		} catch (IOException ioex) {
-			throw new DeviceCloseException();
-		}
+		device.Close();
 	}
 
 }

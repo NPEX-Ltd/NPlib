@@ -11,44 +11,6 @@ public class TestingMain {
 	public static void main(String[] args) {
 		Tester.Test(LoggerTests.class);
 		Tester.Test(DeviceTests.class);
+		Tester.Test(NetworkTests.class);
 	}
-	
-	public static class TestFileWatcher extends FileWatcher {
-
-		public TestFileWatcher() throws IOException {
-			super();
-		}
-
-		@Override
-		protected void OnFileCreated(File file) {
-			if(file.isDirectory()) RegisterDir(file);
-			System.out.println(file.getPath()+" Created");
-			
-			if(!file.getPath().equals("file.txt")) {
-				System.exit(-1);
-			} else {
-				System.out.println("FileWatcher Tests Passed!");
-			}
-		}
-
-		@Override
-		protected void OnFileModified(File file) {
-			System.out.println(file.getPath()+" Edited");
-			if(!file.getPath().equals("file.txt")) {
-				System.exit(-1);
-			} else {
-				System.out.println("FileWatcher Tests Passed!");
-			}
-		}
-
-		@Override
-		protected void OnFileDeleted(File file) {
-			System.out.println(file+" Deleted");
-		}
-		
-		
-		
-		
-	}
-
 }

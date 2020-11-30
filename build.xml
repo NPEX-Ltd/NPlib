@@ -36,7 +36,7 @@
 	    <mkdir dir="${dist}/lib"/>
 
 	    <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
-	    <jar jarfile="${dist}/NPLib-release.jar" basedir="${build}"/>
+	    <jar jarfile="NPlib/${dist}/NPLib-release.jar" basedir="${build}"/>
 	  </target>
 	
 	<target name="weekly" depends="compile"
@@ -45,7 +45,7 @@
 	    <mkdir dir="${dist}/lib"/>
 
 	    <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
-	    <jar jarfile="${dist}/NPLib-weekly.jar" basedir="${build}"/>
+	    <jar jarfile="NPlib/${dist}/NPLib-weekly.jar" basedir="${build}"/>
 	  </target>
 
   <target name="clean"

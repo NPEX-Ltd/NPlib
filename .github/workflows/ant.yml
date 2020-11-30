@@ -6,8 +6,7 @@ name: Java CI
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -21,6 +20,6 @@ jobs:
       with:
         java-version: 14
     - name: Build with Ant
-      run: ant -noinput -buildfile build.xml
+      run: ant CI -buildfile build.xml
     - name: Checkout code
       uses: actions/checkout@v2

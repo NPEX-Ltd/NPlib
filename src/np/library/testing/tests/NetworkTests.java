@@ -6,6 +6,7 @@ import np.library.testing.Test;
 import np.library.testing.Tester;
 
 public class NetworkTests {
+	@SuppressWarnings("resource")
 	@Test
 	public void testNetwork() {
 		
@@ -14,5 +15,6 @@ public class NetworkTests {
 		NetworkIO device = new NetworkIO("localhost", 5000);
 		device.WriteString("Hello");
 		Tester.FailIfNotEqual("Hello", device.ReadStringOrBlock());
+		device.Close();
 	}
 }

@@ -1,9 +1,5 @@
 package np.library.testing.tests;
 
-import java.io.File;
-import java.io.IOException;
-
-import np.library.io.FileWatcher;
 import np.library.testing.Tester;
 
 public class TestingMain {

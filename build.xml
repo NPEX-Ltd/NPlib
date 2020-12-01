@@ -29,6 +29,24 @@
     <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
     <jar jarfile="${dist}/lib/NPLib-${DSTAMP}.jar" basedir="${build}"/>
   </target>
+	
+	<target name="release" depends="compile"
+	        description="generate the distribution">
+	    <!-- Create the distribution directory -->
+	    <mkdir dir="${dist}/lib"/>
+
+	    <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+	    <jar jarfile="${dist}/NPLib-release.jar" basedir="${build}"/>
+	  </target>
+	
+	<target name="weekly" depends="compile"
+	        description="generate the distribution">
+	    <!-- Create the distribution directory -->
+	    <mkdir dir="${dist}/lib"/>
+
+	    <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+	    <jar jarfile="${dist}/NPLib-weekly.jar" basedir="${build}"/>
+	  </target>
 
   <target name="clean"
         description="clean up">
@@ -36,6 +54,16 @@
     <delete dir="${build}"/>
     <delete dir="${dist}"/>
   </target>
+	
+	<!-- create our ant classpath using the fileset task -->
+	<path id="class.path">
+
+	  <!-- include all jars in the lib directory and all sub-directories -->
+	  <fileset dir="libs">
+	    <include name="**/*.jar" />
+	  </fileset>
+
+	</path>
 	
   <target name="CI" depends="dist">
 	  <java failonerror="true" classname="np.library.testing.tests.TestingMain">
@@ -46,6 +74,8 @@
 	  	  </classpath>
 	  </java>
   </target>
+	
+	
 
   <target name="doc" depends="init" description="generate documentation">
     <javadoc sourcepath="${src}" destdir="${doc}"/>

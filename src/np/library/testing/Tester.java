@@ -38,7 +38,6 @@ public class Tester {
 	private static void TestAllMethods(Class<?> clazz) throws Exception {
 		Object instance;
 		instance = clazz.newInstance();
-		Timer timer = new Timer();
 		int passedMethodCounter = 0;
 		for(Method method : clazz.getDeclaredMethods()) {
 			

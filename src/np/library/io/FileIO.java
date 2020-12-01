@@ -1,16 +1,6 @@
 package np.library.io;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import np.library.exceptions.DeviceCloseException;
-import np.library.exceptions.DeviceOpenException;
-import np.library.exceptions.DeviceReadException;
-import np.library.exceptions.DeviceWriteException;
 
 public class FileIO extends IODevice {
 	private BufferedDevice device;

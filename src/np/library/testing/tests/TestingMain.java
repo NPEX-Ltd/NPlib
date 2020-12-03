@@ -8,5 +8,7 @@ public class TestingMain {
 		Tester.Test(LoggerTests.class);
 		Tester.Test(DeviceTests.class);
 		Tester.Test(NetworkTests.class);
+		Tester.Test(ClassFinderTests.class);
+		Tester.Test(XMLTester.class);
 	}
 }

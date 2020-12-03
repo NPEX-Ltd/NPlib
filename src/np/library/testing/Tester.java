@@ -1,5 +1,7 @@
 package np.library.testing;
 import java.lang.reflect.*;
+import java.util.Collection;
+import java.util.List;
 
 import np.library.common.Timer;
 import np.library.exceptions.TestFailedSignal;
@@ -131,8 +133,36 @@ public class Tester {
 			return clazz.getMethod(name, params);
 		} catch (NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
-			Fail("Unable To Invoke Method '"+name+" in class " + clazz.getName());
+			Fail("Unable To Find Method '"+name+" in class " + clazz.getName());
 			return null;
+		}
+	}
+	
+	public static void FailIfTrue(boolean state) {
+		if(state) Fail("Recieved True...");
+	}
+
+	public static void FailIfNull(Object object) {
+		if(object  == null) {
+			Fail("Recieved Null...");
+		}
+	}
+	
+	public static void FailIfNotNull(Object object) {
+		if(object != null) {
+			Fail("Recieved "+object+"...");
+		}
+	}
+	
+	public static void FailIfEmptyList(List<?> list) {
+		if(list.isEmpty()) {
+			Fail("List Is Empty...");
+		}
+	}
+	
+	public static void FailIfEmptyCollection(Collection<?> collection) {
+		if(collection.isEmpty()) {
+			Fail("Collection Is Empty...");
 		}
 	}
 }

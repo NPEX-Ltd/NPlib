@@ -105,6 +105,7 @@ public class Tester {
 			TestFailedSignal tfsig = (TestFailedSignal) e.getCause();
 			throw tfsig;
 		} else if(!(e.getCause() instanceof ReflectiveOperationException)) {
+			e.printStackTrace();
 			throw e;
 		}
 	}

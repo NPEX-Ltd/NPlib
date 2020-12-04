@@ -7,7 +7,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
-import org.xml.sax.helpers.DefaultHandler;
 
 import np.library.annotations.API;
 import np.library.exceptions.FileException;
@@ -27,7 +26,6 @@ public class XMLFile {
 		try {
 			return new XMLFile(path);
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			throw new FileException();
 		}
 	}

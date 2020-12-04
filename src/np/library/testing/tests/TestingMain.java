@@ -10,5 +10,6 @@ public class TestingMain {
 		Tester.Test(NetworkTests.class);
 		Tester.Test(ClassFinderTests.class);
 		Tester.Test(XMLTester.class);
+		Tester.Test(SwingXMLTester.class);
 	}
 }

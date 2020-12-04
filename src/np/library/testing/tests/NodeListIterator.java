@@ -18,7 +18,7 @@ public class NodeListIterator implements Iterable<Node> {
 
 	@Override
 	public Iterator<Node> iterator() {
-		return iterator();
+		return iterator;
 	}
 	
 	public static class NodeIterator implements Iterator<Node> {

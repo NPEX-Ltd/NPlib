@@ -2,7 +2,6 @@ package np.library.xml;
 
 import org.xml.sax.InputSource;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 

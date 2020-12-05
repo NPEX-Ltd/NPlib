@@ -1,40 +1,31 @@
 package np.library.testing.tests;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.Map;
 
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
+import javax.swing.JTextArea;
 
+import np.library.gui.ActionMap;
 import np.library.gui.SwingXML;
+import np.library.gui.SwingXMLActionListener;
+import np.library.gui.SwingXMLFactory;
 import np.library.testing.Test;
-import np.library.xml.NodePrinter;
-import np.library.xml.XMLFile;
 
 public class SwingXMLTester {
 
 	@Test
 	public void testConstruction() {
-		XMLFile file = XMLFile.Load("resources/ui2.xml");
-		Element root = null;
-		if(file.GetNodes().item(0) instanceof Element) {
-			root = (Element) file.GetNodes().item(0);
-		}
+		ActionMap<SwingXMLActionListener> actions = new ActionMap<>();
+		actions.put("onSubmit", new SwingXMLActionListener(this::OnSubmit));
 		
-		NodePrinter.PrintAllChildren(0, root);
+		SwingXML ui = SwingXMLFactory.CreateNewUI("resources/ui2.xml", actions);
+		ui.Show();
 		
-		Map<String, ActionListener> events = new HashMap<>();
-		
-		events.put("onSubmit", this::OnSubmit);
-		
-		SwingXML ui = new SwingXML(events);
-		ui.AddComponentFromNode(ui.GetJFrame(), root);
-		ui.GetJFrame().setVisible(true);
+		ui.Close();
 	}
 	
-	private void OnSubmit(ActionEvent event) {
+	private void OnSubmit(SwingXML ui, ActionEvent event) {
 		System.out.println("Submitted...");
+		JTextArea txtMessageBox = ui.GetComponentByID("txtMessageBox");
+		System.out.println("Text: "+txtMessageBox.getText());
 	}
 }

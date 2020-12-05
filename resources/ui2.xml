@@ -1,11 +1,13 @@
-<JFrame title="TestFrame" size="480,320">
+<JFrame title="TestFrame" size="720,480">
 	<JMenuBar>
 		<JMenu text="File...">
 			<JMenuButton text="Open" onClick="onFileOpen" />
 		</JMenu>
 	</JMenuBar>
-	<JPanel layout="BOXLAYOUT" location="EAST">
-		<JTextArea id="txtMessageBox" location="CENTER">This Is Some Text...</JTextArea>
-		<JButton id="btnOnSubmit" location="SOUTH" onClick="onSubmit">Submit!</JButton>
+	<JPanel layout="BOXLAYOUT" location="CENTER">
+		<JScrollPanel location="CENTER" HS="ALWAYS" VS="ASNEEDED" size="80,25">
+			<JTextArea id="txtMessageBox" location="CENTER" size="40,25" editable="false">This Is Some Text...</JTextArea>
+		</JScrollPanel>
 	</JPanel>
+	<JButton id="btnOnSubmit" location="SOUTH" onClick="onSubmit">Submit!</JButton>
 </JFrame>

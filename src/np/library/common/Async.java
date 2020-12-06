@@ -16,4 +16,8 @@ public class Async {
 	}
 	
 	public static String GetThreadName() { return Thread.currentThread().getName(); }
+
+	public static void Yield() {
+		Thread.yield();
+	}
 }

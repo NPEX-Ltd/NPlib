@@ -20,7 +20,7 @@ public class SwingXMLTester {
 		SwingXML ui = SwingXMLFactory.CreateNewUI("resources/ui2.xml", actions);
 		ui.Show();
 		
-		ui.Close();
+		//ui.Close();
 	}
 	
 	private void OnSubmit(SwingXML ui, ActionEvent event) {

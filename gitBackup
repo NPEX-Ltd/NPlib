@@ -1,0 +1,6 @@
+#/bin/bash
+ant build-all
+
+git add .
+git commit -m "Git Backup"
+git push

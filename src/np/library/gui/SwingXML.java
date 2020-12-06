@@ -6,6 +6,11 @@ import javax.swing.*;
 
 import org.w3c.dom.*;
 
+import np.library.common.Async;
+import np.library.common.Time;
+import np.library.gui.component.builders.JPanelFactory;
+
+import static np.library.xml.NodeUtils.*;
 
 public class SwingXML {
 	private JFrame frame = new JFrame();
@@ -65,8 +70,7 @@ public class SwingXML {
 
 	public void AddJPanelFromNode(Container parent, Node node) {
 		String id = GetAttribute(node, "id");
-		JPanel panel = new JPanel();
-		parent.add(panel, GetBorderLayoutLocation(node));
+		JPanel panel = JPanelFactory.Build(node, parent);
 		components.put(id, panel);
 		RunThroughChildren(node.getNodeName(), panel, node);
 	}
@@ -87,7 +91,7 @@ public class SwingXML {
 		components.put(id, panel);
 		RunThroughChildren(node.getNodeName(), panel, node);
 		
-		panel.resize(width, height);
+		panel.revalidate();
 	}
 	
 	public void AddJPanelFromNode(JFrame parent, Element node) {
@@ -140,75 +144,7 @@ public class SwingXML {
 		}
 	}
 	
-	private String GetAttribute(Node node, String key) {
-		if(HasAttribute(node, key))
-			return node.getAttributes().getNamedItem(key).getNodeValue();
-		else
-			return "";
-	} 
 	
-	private String GetContent(Node node) {
-		return node.getTextContent();
-	}
-	
-	private String GetBorderLayoutLocation(Node node) {
-		String value = "";
-		
-		switch(GetAttribute(node, "location")) {
-		case "CENTER": value = BorderLayout.CENTER; break;
-		case "NORTH": value = BorderLayout.NORTH; break;
-		case "SOUTH": value = BorderLayout.SOUTH; break;
-		case "EAST": value = BorderLayout.EAST; break;
-		case "WEST": value = BorderLayout.WEST; break;
-		}
-		
-		return value;
-	}
-	
-	private int GetVerticalScrollPanePolicy(Node node) {
-		int value = 0;
-		switch(GetAttribute(node, "VS")) {
-		case "ALWAYS": value = JScrollPane.VERTICAL_SCROLLBAR_ALWAYS; break;
-		case "ASNEEDED": value = JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED; break;
-		case "NEVER": value = JScrollPane.VERTICAL_SCROLLBAR_NEVER; break;
-		}
-		return value;
-	}
-	
-	private int GetHorizontalScrollPanePolicy(Node node) {
-		int value = 0;
-		switch(GetAttribute(node, "HS")) {
-		case "ALWAYS": value = JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS; break;
-		case "ASNEEDED": value = JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED; break;
-		case "NEVER": value = JScrollPane.HORIZONTAL_SCROLLBAR_NEVER; break;
-		}
-		return value;
-	}
-	
-	public int GetWidth(Node node) {
-		String size = GetAttribute(node, "size");
-		if(size.isEmpty()) size = "0,0";
-		return Integer.parseInt(size.split(",")[0]);
-	}
-	
-	public int GetHeight(Node node) {
-		String size = GetAttribute(node, "size");
-		if(size.isEmpty()) size = "0,0";
-		return Integer.parseInt(size.split(",")[1]);
-	}
-	
-	public boolean GetBooleanAttrib(Node node, String key) {
-		if(HasAttribute(node, key)) {
-			String value = GetAttribute(node, key);
-			if(value.equalsIgnoreCase("TRUE")) return true;
-			if(value.equalsIgnoreCase("FALSE")) return false;
-		}
-		return false;
-	} 
-	
-	private boolean HasAttribute(Node node, String key) {
-		return node.getAttributes().getNamedItem(key) != null;
-	}
 
 	public void Show() {
 		frame.setVisible(true);

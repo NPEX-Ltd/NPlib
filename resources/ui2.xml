@@ -5,8 +5,8 @@
 		</JMenu>
 	</JMenuBar>
 	<JPanel layout="BOXLAYOUT" location="CENTER">
-		<JScrollPanel location="CENTER" HS="ALWAYS" VS="ASNEEDED" size="80,25">
-			<JTextArea id="txtMessageBox" location="CENTER" size="40,25" editable="false">This Is Some Text...</JTextArea>
+		<JScrollPanel location="CENTER" HS="ALWAYS" VS="ALWAYS" size="80,25">
+			<JTextArea id="txtMessageBox" location="CENTER" size="10,10" editable="true">This Is Some Text...</JTextArea>
 		</JScrollPanel>
 	</JPanel>
 	<JButton id="btnOnSubmit" location="SOUTH" onClick="onSubmit">Submit!</JButton>

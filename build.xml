@@ -68,6 +68,7 @@
   <target name="CI" depends="dist">
 	  <java failonerror="true" classname="np.library.testing.tests.TestingMain">
 	  	<arg value="-h"/>
+	  	<arg value="-ant"/>
 	  	  <classpath>
 	  	    <pathelement location="${dist}/lib/NPLib-${DSTAMP}.jar"/>
 	  	    <pathelement path="${java.class.path}"/>

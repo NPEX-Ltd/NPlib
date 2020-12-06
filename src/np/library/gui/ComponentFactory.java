@@ -15,5 +15,5 @@ public abstract class ComponentFactory<T> {
 			throw new JuggledException(ex);
 		}
 	} 
-	public abstract T Construct(Container parent, Node node);
+	public abstract T Construct(Node node);
 }

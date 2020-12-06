@@ -15,6 +15,8 @@ public class SwingXML {
 	private Map<String, JComponent> components = new HashMap<>(); 
 	private Map<String, SwingXMLActionListener> eventHandlers;
 	
+	private ComponentFactory<JPanel> panelFactory = ComponentFactory.GetFactoryOf(JPanelFactory.class);
+	private ComponentFactory<JTextField> textFieldFactory = ComponentFactory.GetFactoryOf(JTextFieldFactory.class);
 	
 	
 	public SwingXML(Map<String, SwingXMLActionListener> eventHandlers) {
@@ -34,6 +36,7 @@ public class SwingXML {
 		case "JButton": AddJButton(parent, node); break;
 		case "JTextArea": AddJTextArea(parent, node); break;
 		case "JScrollPanel": AddJScrollPanelFromNode(parent, node); break;
+		case "JTextField": AddJTextField(parent, node); break;
 		}
 	}
 
@@ -65,10 +68,20 @@ public class SwingXML {
 		
 		RunThroughChildren(node.getNodeName(), frame, node);
 	}
+	
+	private void AddJTextField(Container parent, Node node) {
+		String id = GetAttribute(node, "id");
+		JTextField field = textFieldFactory.Construct(node);
+		parent.add(field, GetBorderLayoutLocation(node));
+		RegisterComponent(id, field);
+	}
+	
+	
 
 	public void AddJPanelFromNode(Container parent, Node node) {
 		String id = GetAttribute(node, "id");
-		JPanel panel = ComponentFactory.GetFactoryOf(JPanelFactory.class).Construct(parent, node);
+		JPanel panel = panelFactory.Construct(node);
+		parent.add(panel, GetBorderLayoutLocation(node));
 		components.put(id, panel);
 		RunThroughChildren(node.getNodeName(), panel, node);
 	}
@@ -126,7 +139,11 @@ public class SwingXML {
 	@SuppressWarnings("unchecked")
 	public <T> T GetComponentByID(String id) {
 		try {
-			return (T) components.get(id);
+			if(components.containsKey(id)) {
+				return (T) components.get(id);
+			} else {
+				throw new ClassCastException();
+			}
 		} catch (ClassCastException ccex) {
 			System.err.println("Unable To Retrieve Component '"+id+"'");
 			System.exit(-10);
@@ -134,11 +151,14 @@ public class SwingXML {
 		return null;
 	}
 	
+	public void RegisterComponent(String id, JComponent component) {
+		components.put(id, component);
+	}
+	
 	private void RunThroughChildren(String parentType, Container parent, Node node) {
 		NodeList children = node.getChildNodes();
 		System.out.println("Node Length: "+children.getLength());
 		for(int i = 0; i < children.getLength(); i++) {
-			System.out.println(children.item(i).getNodeName());
 			AddComponentFromNode(parent, children.item(i));
 		}
 	}

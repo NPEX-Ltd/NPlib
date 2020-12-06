@@ -5,7 +5,10 @@
 		</JMenu>
 	</JMenuBar>
 		<JScrollPanel location="CENTER" HS="ALWAYS" VS="ALWAYS" size="80,25">
-			<JTextArea id="txtMessageBox" location="CENTER" size="10,10" editable="true">This Is Some Text...</JTextArea>
+			<JTextArea id="txtMessageBox" location="CENTER" size="10,10" editable="false">This Is Some Text...</JTextArea>
 		</JScrollPanel>
-	<JButton id="btnOnSubmit" location="SOUTH" onClick="onSubmit">Submit!</JButton>
+	<JPanel location="SOUTH">
+		<JTextField id="txtfInput" location="CENTER" size="25"></JTextField>
+		<JButton id="btnOnSubmit" location="EAST" onClick="onSubmit">Submit!</JButton>
+	</JPanel>
 </JFrame>

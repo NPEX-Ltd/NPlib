@@ -6,7 +6,7 @@ import np.library.gui.component.builders.ArgsParser;
 import np.library.testing.Tester;
 
 public class TestingMain {
-	public static boolean ANT_MODE = false;
+	public static boolean ANT_MODE = true;
 	public static void main(String[] args) {
 		System.out.println(Arrays.toString(args));
 		ANT_MODE = ArgsParser.ArgsContainsFlag(args, "-ant");
@@ -18,5 +18,6 @@ public class TestingMain {
 		Tester.Test(XMLTester.class);
 		Tester.Test(SwingXMLTester.class);
 		Tester.Test(AsyncTests.class);
+		Tester.Test(HTTPTester.class);
 	}
 }

@@ -6,8 +6,6 @@ import javax.swing.*;
 
 import org.w3c.dom.*;
 
-import np.library.common.Async;
-import np.library.common.Time;
 import np.library.gui.component.builders.JPanelFactory;
 
 import static np.library.xml.NodeUtils.*;
@@ -70,12 +68,11 @@ public class SwingXML {
 
 	public void AddJPanelFromNode(Container parent, Node node) {
 		String id = GetAttribute(node, "id");
-		JPanel panel = JPanelFactory.Build(node, parent);
+		JPanel panel = ComponentFactory.GetFactoryOf(JPanelFactory.class).Construct(parent, node);
 		components.put(id, panel);
 		RunThroughChildren(node.getNodeName(), panel, node);
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void AddJScrollPanelFromNode(Container parent, Node node) {
 		String id = GetAttribute(node, "id");
 		int VS, HS;
@@ -101,12 +98,14 @@ public class SwingXML {
 	public void AddJTextArea(Container parent, Node node) {
 		String id = GetAttribute(node, "id");
 		String content = GetContent(node);
-		int colums = GetWidth(node);
-		int rows = GetHeight(node);
+		
 		JTextArea textArea = new JTextArea(content);
-		textArea.setSize(colums, rows);
-		int fontSize = textArea.getFont().getSize();
-		textArea.setPreferredSize(new Dimension(colums * fontSize, rows * fontSize));
+		
+		if(HasAttribute(node, "size")) {
+			int colums = GetWidth(node);
+			int rows = GetHeight(node);
+			textArea.setSize(colums, rows);
+		}
 	
 		if(HasAttribute(node, "editable")) {
 			System.out.println("node has Editable Attrib...");

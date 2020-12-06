@@ -75,6 +75,9 @@
 	  </java>
   </target>
 	
+	<target name="build-all" depends="clean,dist">
+	</target>
+	
 	
 
   <target name="doc" depends="init" description="generate documentation">

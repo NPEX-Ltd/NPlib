@@ -21,7 +21,7 @@ public class IOUtils {
 			file.createNewFile();
 			return file;
 		} catch (IOException ioex) {
-			throw new FileCreationException();
+			throw new FileCreationException(ioex);
 		}
 	}
 }

@@ -6,8 +6,6 @@ import javax.swing.*;
 
 import org.w3c.dom.*;
 
-import np.library.common.Async;
-import np.library.common.Time;
 import np.library.gui.component.builders.JPanelFactory;
 
 import static np.library.xml.NodeUtils.*;
@@ -17,6 +15,8 @@ public class SwingXML {
 	private Map<String, JComponent> components = new HashMap<>(); 
 	private Map<String, SwingXMLActionListener> eventHandlers;
 	
+	private ComponentFactory<JPanel> panelFactory = ComponentFactory.GetFactoryOf(JPanelFactory.class);
+	private ComponentFactory<JTextField> textFieldFactory = ComponentFactory.GetFactoryOf(JTextFieldFactory.class);
 	
 	
 	public SwingXML(Map<String, SwingXMLActionListener> eventHandlers) {
@@ -36,6 +36,7 @@ public class SwingXML {
 		case "JButton": AddJButton(parent, node); break;
 		case "JTextArea": AddJTextArea(parent, node); break;
 		case "JScrollPanel": AddJScrollPanelFromNode(parent, node); break;
+		case "JTextField": AddJTextField(parent, node); break;
 		}
 	}
 
@@ -67,15 +68,24 @@ public class SwingXML {
 		
 		RunThroughChildren(node.getNodeName(), frame, node);
 	}
+	
+	private void AddJTextField(Container parent, Node node) {
+		String id = GetAttribute(node, "id");
+		JTextField field = textFieldFactory.Construct(node);
+		parent.add(field, GetBorderLayoutLocation(node));
+		RegisterComponent(id, field);
+	}
+	
+	
 
 	public void AddJPanelFromNode(Container parent, Node node) {
 		String id = GetAttribute(node, "id");
-		JPanel panel = JPanelFactory.Build(node, parent);
+		JPanel panel = panelFactory.Construct(node);
+		parent.add(panel, GetBorderLayoutLocation(node));
 		components.put(id, panel);
 		RunThroughChildren(node.getNodeName(), panel, node);
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void AddJScrollPanelFromNode(Container parent, Node node) {
 		String id = GetAttribute(node, "id");
 		int VS, HS;
@@ -101,12 +111,14 @@ public class SwingXML {
 	public void AddJTextArea(Container parent, Node node) {
 		String id = GetAttribute(node, "id");
 		String content = GetContent(node);
-		int colums = GetWidth(node);
-		int rows = GetHeight(node);
+		
 		JTextArea textArea = new JTextArea(content);
-		textArea.setSize(colums, rows);
-		int fontSize = textArea.getFont().getSize();
-		textArea.setPreferredSize(new Dimension(colums * fontSize, rows * fontSize));
+		
+		if(HasAttribute(node, "size")) {
+			int colums = GetWidth(node);
+			int rows = GetHeight(node);
+			textArea.setSize(colums, rows);
+		}
 	
 		if(HasAttribute(node, "editable")) {
 			System.out.println("node has Editable Attrib...");
@@ -127,7 +139,11 @@ public class SwingXML {
 	@SuppressWarnings("unchecked")
 	public <T> T GetComponentByID(String id) {
 		try {
-			return (T) components.get(id);
+			if(components.containsKey(id)) {
+				return (T) components.get(id);
+			} else {
+				throw new ClassCastException();
+			}
 		} catch (ClassCastException ccex) {
 			System.err.println("Unable To Retrieve Component '"+id+"'");
 			System.exit(-10);
@@ -135,11 +151,14 @@ public class SwingXML {
 		return null;
 	}
 	
+	public void RegisterComponent(String id, JComponent component) {
+		components.put(id, component);
+	}
+	
 	private void RunThroughChildren(String parentType, Container parent, Node node) {
 		NodeList children = node.getChildNodes();
 		System.out.println("Node Length: "+children.getLength());
 		for(int i = 0; i < children.getLength(); i++) {
-			System.out.println(children.item(i).getNodeName());
 			AddComponentFromNode(parent, children.item(i));
 		}
 	}

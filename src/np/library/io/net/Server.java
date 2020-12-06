@@ -28,7 +28,7 @@ public abstract class Server {
 			this.maxConnections = maxConnections;
 		} catch (IOException e) {
 			stopped = true;
-			throw new DeviceOpenException();
+			throw new DeviceOpenException(e);
 		}
 	}
 	

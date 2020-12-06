@@ -1,8 +1,7 @@
 package np.library.exceptions;
 
-public class DeviceException extends RuntimeException {
+public class DeviceException extends JuggledException {
 	private static final long serialVersionUID = 1L;
 	
-	public DeviceException() {}
-	public DeviceException(String message) {super(message);}
+	public DeviceException(Throwable cause) { super(cause); }
 }

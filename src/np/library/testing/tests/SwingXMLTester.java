@@ -3,7 +3,10 @@ package np.library.testing.tests;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
+import np.library.common.Async;
+import np.library.common.Time;
 import np.library.gui.ActionMap;
 import np.library.gui.SwingXML;
 import np.library.gui.SwingXMLActionListener;
@@ -19,13 +22,25 @@ public class SwingXMLTester {
 		
 		SwingXML ui = SwingXMLFactory.CreateNewUI("resources/ui2.xml", actions);
 		ui.Show();
-		
-		//ui.Close();
+		if(TestingMain.ANT_MODE) {
+			ui.Close();
+		} else {
+			ui.SetMaster();
+			
+			Async.DispatchDaemon("Printer", () -> {
+				JTextArea txtMessageBox = ui.GetComponentByID("txtMessageBox");
+				for(;;) {
+					Time.SleepMillis(1000);
+					txtMessageBox.append("Tick!\n");
+				}
+			});
+			
+		}
 	}
 	
 	private void OnSubmit(SwingXML ui, ActionEvent event) {
-		System.out.println("Submitted...");
+		JTextField txtfInput = ui.GetComponentByID("txtfInput");
 		JTextArea txtMessageBox = ui.GetComponentByID("txtMessageBox");
-		System.out.println("Text: "+txtMessageBox.getText());
+		txtMessageBox.append(txtfInput.getText() + "\n");
 	}
 }

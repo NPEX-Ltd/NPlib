@@ -27,7 +27,7 @@ public class XMLFile {
 		try {
 			return new XMLFile(path);
 		} catch (Exception ex) {
-			throw new FileException();
+			throw new FileException(ex);
 		}
 	}
 	

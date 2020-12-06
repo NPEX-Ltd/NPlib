@@ -33,7 +33,7 @@ public class BufferedDevice extends IODevice {
 		try {
 			return new BufferedDevice(file);
 		} catch (IOException ioex) {
-			throw new DeviceOpenException();
+			throw new DeviceOpenException(ioex);
 		}
 	}
 	
@@ -41,7 +41,7 @@ public class BufferedDevice extends IODevice {
 		try {
 			return Create(new Socket(hostname, port));
 		} catch (IOException e) {
-			throw new DeviceOpenException("Unable To Open Device To "+hostname+":"+port);
+			throw new DeviceOpenException(e);
 		}
 	}
 	
@@ -49,7 +49,7 @@ public class BufferedDevice extends IODevice {
 		try {
 			return new BufferedDevice(sock.getInputStream(), sock.getOutputStream());
 		} catch (IOException ioex) {
-			throw new DeviceOpenException();
+			throw new DeviceOpenException(ioex);
 		}
 	}
 
@@ -80,7 +80,7 @@ public class BufferedDevice extends IODevice {
 			fileWriter.close();
 		} catch (IOException ioex) {
 			isOpen = false;
-			throw new DeviceCloseException();
+			throw new DeviceCloseException(ioex);
 		} finally {
 			isOpen = false;
 		}

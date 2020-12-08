@@ -22,6 +22,6 @@ public class TestingMain {
 		Tester.Test(StringFormatterTester.class);
 		Tester.Test(AsyncTests.class);
 		//Tester.Test(HTTPTester.class);
-		Tester.Test(JNATester.class);
+		//Tester.Test(JNATester.class);
 	}
 }

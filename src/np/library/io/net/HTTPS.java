@@ -10,12 +10,35 @@ public class HTTPS {
 	
 	private static final int
 	OK = 200,
+	UNAUTHORISED = 401,
 	BAD_METHOD = 405,
 	FILE_NOT_FOUND = 404;
 
 
 	public static String Get(String site, Map<String, String> params) {
 		return Communicate("GET", site, params);
+	}
+	
+	public static Response SendRequest(Request request) {
+		Response response = new Response();
+		try {
+			response.content = Communicate(request.method, request.url, request.params);
+			response.responseCode = OK;
+		} catch (BadHttpResponseException bhrex) {
+			response.responseCode = bhrex.getCode();
+		}
+		return response;
+	}
+	
+	public static Response Get(Request request) {
+		Response response = new Response();
+		try {
+			response.content = Get(request.url, request.params);
+			response.responseCode = OK;
+		} catch (BadHttpResponseException bhrex) {
+			response.responseCode = bhrex.getCode();
+		}
+		return response;
 	}
 	
 	public static String Post(String site, Map<String, String> params) {
@@ -58,7 +81,7 @@ public class HTTPS {
 				con.disconnect();
 				return content.toString();
 			} else {
-				System.err.println("Received Error Code "+responseCode+" From "+con.getURL().getHost());
+				System.out.println("Received Error Code "+responseCode+" From "+con.getURL().getHost());
 				throw new BadHttpResponseException(responseCode);
 			}
 		} catch (IOException ioex) {
@@ -78,20 +101,57 @@ public class HTTPS {
 	
 	
 	public static class ParameterStringBuilder {
-	    public static String getParamsString(Map<String, String> params) throws UnsupportedEncodingException{
-	        StringBuilder result = new StringBuilder();
-
-	        for (Map.Entry<String, String> entry : params.entrySet()) {
-	          result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
-	          result.append("=");
-	          result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
-	          result.append("&");
-	        }
-
-	        String resultString = result.toString();
-	        return resultString.length() > 0
-	          ? resultString.substring(0, resultString.length() - 1)
-	          : resultString;
+	    public static String getParamsString(Map<String, String> params){
+	    	try {
+		        StringBuilder result = new StringBuilder();
+	
+		        for (Map.Entry<String, String> entry : params.entrySet()) {
+		          result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+		          result.append("=");
+		          result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+		          result.append("&");
+		        }
+	
+		        String resultString = result.toString();
+		        return resultString.length() > 0
+		          ? resultString.substring(0, resultString.length() - 1)
+		        	: resultString;
+		    } catch (UnsupportedEncodingException ueex) {
+		    	throw new JuggledException(ueex);
+		    }
 	    }
+	}
+	
+	public static class Request {
+		public Map<String, String> params;
+		public String header, contentType, method;
+		public String url;
+		
+		public static Request Build(String url, String header, String contentType, String method, Map<String, String> params) {
+			return new Request(header, params, contentType, method, url);
+		}
+		
+		private Request(String header, Map<String, String> body, String contentType, String method, String url) {
+			super();
+			this.header = header;
+			this.params = body;
+			this.contentType = contentType;
+			this.method = method;
+			this.url = url;
+		}
+
+		public static Request BuildGetRequest(String string, Map<String, String> params){
+			return Build(string, null, "GET", null, params);
+		}
+	}
+	
+	public static class Response {
+		public String content, url;
+		public int responseCode;
+		
+		@Override
+		public String toString() {
+			return "["+responseCode+"]: "+content;
+		}
 	}
 }

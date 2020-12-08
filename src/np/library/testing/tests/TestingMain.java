@@ -16,7 +16,7 @@ public class TestingMain {
 		//Tester.Test(NetworkTests.class);
 		Tester.Test(ClassFinderTests.class);
 		Tester.Test(XMLTester.class);
-		Tester.Test(SwingXMLTester.class);
+		//Tester.Test(SwingXMLTester.class);
 		Tester.Test(AsyncTests.class);
 		Tester.Test(HTTPTester.class);
 	}

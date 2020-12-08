@@ -14,11 +14,19 @@ public class TestingMain {
 		Tester.Test(LoggerTests.class);
 		Tester.Test(DeviceTests.class);
 		//Tester.Test(NetworkTests.class);
+<<<<<<< HEAD
 //		Tester.Test(ClassFinderTests.class);
 //		Tester.Test(XMLTester.class);
 //		Tester.Test(SwingXMLTester.class);
 //		Tester.Test(AsyncTests.class);
 //		Tester.Test(HTTPTester.class);
 		Tester.Test(StringFormatterTester.class);
+=======
+		Tester.Test(ClassFinderTests.class);
+		Tester.Test(XMLTester.class);
+		//Tester.Test(SwingXMLTester.class);
+		Tester.Test(AsyncTests.class);
+		Tester.Test(HTTPTester.class);
+>>>>>>> 9c4964ca6ea26394103fd904980b6e3ec5209672
 	}
 }

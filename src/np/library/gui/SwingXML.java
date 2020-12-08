@@ -6,7 +6,9 @@ import javax.swing.*;
 
 import org.w3c.dom.*;
 
+import np.library.gui.component.builders.ComponentFactory;
 import np.library.gui.component.builders.JPanelFactory;
+import np.library.gui.component.builders.JTextFieldFactory;
 
 import static np.library.xml.NodeUtils.*;
 

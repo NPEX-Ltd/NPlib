@@ -1,6 +1,5 @@
-package np.library.gui;
+package np.library.gui.component.builders;
 
-import java.awt.Container;
 
 import org.w3c.dom.Node;
 

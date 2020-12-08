@@ -1,6 +1,5 @@
-package np.library.gui;
+package np.library.gui.component.builders;
 
-import java.awt.Container;
 
 import javax.swing.*;
 
@@ -10,7 +9,6 @@ public class JTextFieldFactory extends ComponentFactory<JTextField> {
 
 	@Override
 	public JTextField Construct(Node node) {
-		String location = GetBorderLayoutLocation(node);
 		JTextField textField = new JTextField();
 		int width = GetWidth(node);
 		textField.setColumns(width);

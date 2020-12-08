@@ -8,6 +8,7 @@ import np.library.exceptions.JuggledException;
 
 public class HTTPS {
 	
+	@SuppressWarnings("unused")
 	private static final int
 	OK = 200,
 	BAD_METHOD = 405,

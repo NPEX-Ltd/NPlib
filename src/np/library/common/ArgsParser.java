@@ -1,4 +1,4 @@
-package np.library.gui.component.builders;
+package np.library.common;
 
 public class ArgsParser {
 	public static boolean ArgsContainsFlag(String[] args, String flag) {

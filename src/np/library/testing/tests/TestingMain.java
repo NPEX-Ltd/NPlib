@@ -2,7 +2,7 @@ package np.library.testing.tests;
 
 import java.util.Arrays;
 
-import np.library.gui.component.builders.ArgsParser;
+import np.library.common.ArgsParser;
 import np.library.testing.Tester;
 
 public class TestingMain {
@@ -14,10 +14,11 @@ public class TestingMain {
 		Tester.Test(LoggerTests.class);
 		Tester.Test(DeviceTests.class);
 		//Tester.Test(NetworkTests.class);
-		Tester.Test(ClassFinderTests.class);
-		Tester.Test(XMLTester.class);
-		Tester.Test(SwingXMLTester.class);
-		Tester.Test(AsyncTests.class);
-		Tester.Test(HTTPTester.class);
+//		Tester.Test(ClassFinderTests.class);
+//		Tester.Test(XMLTester.class);
+//		Tester.Test(SwingXMLTester.class);
+//		Tester.Test(AsyncTests.class);
+//		Tester.Test(HTTPTester.class);
+		Tester.Test(StringFormatterTester.class);
 	}
 }

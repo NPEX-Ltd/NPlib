@@ -1,7 +1,10 @@
 package np.library.io;
 import java.io.*;
 
+import np.library.annotations.API;
+import np.library.annotations.API.Level;
 import np.library.exceptions.FileCreationException;
+@API(level = Level.ALPHA)
 public class IOUtils {
 	public static boolean FileExists(String file) {
 		return ToFile(file).exists();

@@ -4,8 +4,10 @@ import java.io.*;
 import java.net.*;
 import java.util.Map;
 
+import np.library.annotations.API;
+import np.library.annotations.API.Level;
 import np.library.exceptions.JuggledException;
-
+@API(level = Level.ALPHA)
 public class HTTPS {
 	
 	@SuppressWarnings("unused")

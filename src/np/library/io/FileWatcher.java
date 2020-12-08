@@ -3,9 +3,12 @@ package np.library.io;
 import java.io.*;
 import java.nio.file.*;
 
+import np.library.annotations.API;
+import np.library.annotations.API.Level;
+
 import static java.nio.file.StandardWatchEventKinds.*;
 
-
+@API(level = Level.ALPHA)
 public abstract class FileWatcher {
 	private WatchService watcher = FileSystems.getDefault().newWatchService();
 	public FileWatcher() throws IOException {}

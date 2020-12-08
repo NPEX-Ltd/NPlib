@@ -4,6 +4,10 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import np.library.annotations.API;
+import np.library.annotations.API.Level;
+
+@API(level = Level.ALPHA)
 public class StringFormatter {
 	
 	private Map<String, DataProvider<String>> dataProviders = new HashMap<>();

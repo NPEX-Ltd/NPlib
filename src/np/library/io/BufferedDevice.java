@@ -11,9 +11,11 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import np.library.annotations.API;
+import np.library.annotations.API.Level;
 import np.library.exceptions.DeviceCloseException;
 import np.library.exceptions.DeviceOpenException;
-
+@API(level = Level.ALPHA)
 public class BufferedDevice extends IODevice {
 	private BufferedReader fileReader;
 	private PrintWriter fileWriter;

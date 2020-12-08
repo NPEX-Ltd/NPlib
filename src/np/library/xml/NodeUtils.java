@@ -6,6 +6,9 @@ import javax.swing.JScrollPane;
 
 import org.w3c.dom.Node;
 
+import np.library.annotations.API;
+import np.library.annotations.API.Level;
+@API(level = Level.ALPHA)
 public class NodeUtils {
 	public static String GetAttribute(Node node, String key) {
 		if(HasAttribute(node, key))

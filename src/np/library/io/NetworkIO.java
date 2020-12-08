@@ -4,6 +4,9 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import np.library.annotations.API;
+import np.library.annotations.API.Level;
+@API(level = Level.ALPHA)
 public class NetworkIO extends IODevice {
 	private BufferedDevice device;
 	private String host, address;

@@ -2,6 +2,9 @@ package np.library.io;
 
 import java.io.File;
 
+import np.library.annotations.API;
+import np.library.annotations.API.Level;
+@API(level = Level.ALPHA)
 public class FileIO extends IODevice {
 	private BufferedDevice device;
 	

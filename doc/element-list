@@ -1,7 +1,11 @@
+np.library.annotations
 np.library.common
 np.library.common.strings
 np.library.exceptions
+np.library.gui
+np.library.gui.component.builders
 np.library.io
 np.library.io.net
 np.library.testing
 np.library.testing.tests
+np.library.xml

@@ -1,5 +1,9 @@
 package np.library.common;
 
+import np.library.annotations.API;
+import np.library.annotations.API.Level;
+
+@API(level = Level.ALPHA)
 class LoggerImpl extends Logger {
 	protected LoggerImpl(String name) {
 		super(name);

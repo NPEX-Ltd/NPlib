@@ -2,9 +2,11 @@ package np.library.gui;
 
 import java.util.HashMap;
 
+import np.library.annotations.API;
+import np.library.annotations.API.Level;
 import np.library.common.Pair;
 
-
+@API(level = Level.ALPHA)
 public class ActionMap<T> {
 	private HashMap<String, T> actions = new HashMap<>();
 

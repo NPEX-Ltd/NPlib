@@ -31,7 +31,8 @@ public class BufferedDevice extends IODevice {
 			this(new FileInputStream(file), new FileOutputStream(file)); 
 	}
 	
-	public static BufferedDevice Create(File file) {
+	public static BufferedDevice Create(File file)
+	throws DeviceOpenException {
 		try {
 			return new BufferedDevice(file);
 		} catch (IOException ioex) {
@@ -39,7 +40,8 @@ public class BufferedDevice extends IODevice {
 		}
 	}
 	
-	public static BufferedDevice Create(String hostname, int port) {
+	public static BufferedDevice Create(String hostname, int port)
+	throws DeviceOpenException {
 		try {
 			return Create(new Socket(hostname, port));
 		} catch (IOException e) {
@@ -47,7 +49,8 @@ public class BufferedDevice extends IODevice {
 		}
 	}
 	
-	public static BufferedDevice Create(Socket sock) {
+	public static BufferedDevice Create(Socket sock)
+	throws DeviceOpenException {
 		try {
 			return new BufferedDevice(sock.getInputStream(), sock.getOutputStream());
 		} catch (IOException ioex) {
@@ -74,7 +77,8 @@ public class BufferedDevice extends IODevice {
 	}
 	
 	@Override
-	public void Close() {
+	public void Close()
+	throws DeviceCloseException {
 		try {
 			if(!IsOpen()) return;
 			

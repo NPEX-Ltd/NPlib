@@ -10,6 +10,8 @@ import np.library.exceptions.JuggledException;
 @API(level = Level.ALPHA)
 public class HTTPS {
 	
+	private HTTPS() {}
+	
 	@SuppressWarnings("unused")
 	private static final int
 	OK = 200,

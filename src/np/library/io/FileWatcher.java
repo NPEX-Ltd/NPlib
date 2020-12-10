@@ -5,13 +5,21 @@ import java.nio.file.*;
 
 import np.library.annotations.API;
 import np.library.annotations.API.Level;
+import np.library.common.Async;
+import np.library.exceptions.JuggledException;
 
 import static java.nio.file.StandardWatchEventKinds.*;
 
 @API(level = Level.ALPHA)
 public abstract class FileWatcher {
-	private WatchService watcher = FileSystems.getDefault().newWatchService();
-	public FileWatcher() throws IOException {}
+	private WatchService watcher;
+	public FileWatcher() throws JuggledException {
+		try {
+			watcher = FileSystems.getDefault().newWatchService();
+		} catch (IOException ioex) {
+			throw new JuggledException(ioex);
+		}
+	}
 	
 	protected abstract void OnFileCreated(File file);
 	protected abstract void OnFileModified(File file);
@@ -20,21 +28,18 @@ public abstract class FileWatcher {
 	public boolean continueFlag;
 	
 	@SuppressWarnings("unused")
-	public void RegisterDir(File dir) {
+	public void RegisterDir(File dir)
+	throws JuggledException {
 		try {
 			if(!dir.isDirectory()) return;
 			WatchKey key = Path.of(dir.getPath()).register(watcher, ENTRY_CREATE, ENTRY_DELETE, ENTRY_MODIFY);
 		} catch (Exception ex) {
-			System.out.println(ex);
+			throw new JuggledException(ex);
 		}
 	}
 	
 	public Thread StartPollingForEvents() {
-		Thread t = new Thread(() -> { AsyncPollEvents(); });
-		t.setDaemon(true);
-		t.setName("FileWatcher");
-		t.start();
-		return t;
+		return Async.DispatchDaemon("FileWatcher", () -> { AsyncPollEvents(); });
 	}
 	
 	public void StopPolling() {

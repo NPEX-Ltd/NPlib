@@ -3,6 +3,9 @@ package np.library.xml;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import np.library.annotations.API;
+import np.library.annotations.API.Level;
+@API(level = Level.ALPHA)
 public class NodeTraverser {
 	public static void ConsumeAll(Node root, NodeConsumer consumer) {
 		ConsumeAll(0, root, consumer);

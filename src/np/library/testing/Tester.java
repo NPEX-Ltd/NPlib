@@ -1,10 +1,14 @@
 package np.library.testing;
 import java.lang.reflect.*;
+
 import java.util.Collection;
 import java.util.List;
 
+import np.library.annotations.API;
+import np.library.annotations.API.Level;
 import np.library.common.Timer;
 import np.library.exceptions.TestFailedSignal;
+@API(level = Level.ALPHA)
 public class Tester {
 	public static boolean Test(Class<?> clazz) {
 		try {

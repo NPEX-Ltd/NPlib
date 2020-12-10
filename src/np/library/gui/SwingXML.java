@@ -6,10 +6,14 @@ import javax.swing.*;
 
 import org.w3c.dom.*;
 
+import np.library.annotations.API;
+import np.library.annotations.API.Level;
+import np.library.gui.component.builders.ComponentFactory;
 import np.library.gui.component.builders.JPanelFactory;
+import np.library.gui.component.builders.JTextFieldFactory;
 
 import static np.library.xml.NodeUtils.*;
-
+@API(level = Level.ALPHA)
 public class SwingXML {
 	private JFrame frame = new JFrame();
 	private Map<String, JComponent> components = new HashMap<>(); 

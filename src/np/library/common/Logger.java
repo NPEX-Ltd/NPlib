@@ -1,7 +1,9 @@
 package np.library.common;
 
+import np.library.annotations.API;
+import np.library.annotations.API.Level;
 import np.library.common.strings.StringFormatter;
-
+@API(level = Level.ALPHA)
 public abstract class Logger {
 	protected final String name;
 	protected StringFormatter formatter;

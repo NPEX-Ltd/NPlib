@@ -6,11 +6,13 @@ import java.net.Socket;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.locks.ReentrantLock;
 
+import np.library.annotations.API;
+import np.library.annotations.API.Level;
 import np.library.common.Time;
 import np.library.exceptions.DeviceOpenException;
 import np.library.io.IODevice;
 import np.library.io.NetworkIO;
-
+@API(level = Level.ALPHA)
 public abstract class Server {
 	private ReentrantLock lock = new ReentrantLock();
 	private ServerSocket server;

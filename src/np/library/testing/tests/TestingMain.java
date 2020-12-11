@@ -13,11 +13,11 @@ public class TestingMain {
 		System.out.println("Running In Ant Mode? "+ANT_MODE);
 		Tester.Test(LoggerTests.class);
 		Tester.Test(DeviceTests.class);
-		Tester.Test(NetworkTests.class);
+		if(ArgsParser.ArgsContainsFlag(args, "-net")) Tester.Test(NetworkTests.class);
 		Tester.Test(ClassFinderTests.class);
 		Tester.Test(XMLTester.class);
 		Tester.Test(AsyncTests.class);
-		Tester.Test(HTTPTester.class);
+		if(ArgsParser.ArgsContainsFlag(args, "-net")) Tester.Test(HTTPTester.class);
 		Tester.Test(AsyncTests.class);
 	}
 }

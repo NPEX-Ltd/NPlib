@@ -76,12 +76,24 @@
 	  <java failonerror="true" classname="np.library.testing.tests.TestingMain">
 	  	<arg value="-h"/>
 	  	<arg value="-ant"/>
+	  	<arg value="-net"/>
 	  	  <classpath>
 	  	    <pathelement location="${dist}/lib/NPLib-${DSTAMP}.jar"/>
 	  	    <pathelement path="${java.class.path}"/>
 	  	  </classpath>
 	  </java>
   </target>
+	
+	<target name="CI-NoNetwork" depends="dist">
+		  <java failonerror="true" classname="np.library.testing.tests.TestingMain">
+		  	<arg value="-h"/>
+		  	<arg value="-ant"/>
+		  	  <classpath>
+		  	    <pathelement location="${dist}/lib/NPLib-${DSTAMP}.jar"/>
+		  	    <pathelement path="${java.class.path}"/>
+		  	  </classpath>
+		  </java>
+	  </target>
 	
 	<target name="build-all" depends="clean,dist">
 	</target>

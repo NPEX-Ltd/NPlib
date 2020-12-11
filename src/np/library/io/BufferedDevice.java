@@ -1,30 +1,27 @@
 package np.library.io;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 
 import np.library.annotations.API;
 import np.library.annotations.API.Level;
-import np.library.exceptions.DeviceCloseException;
-import np.library.exceptions.DeviceOpenException;
+import np.library.exceptions.*;
 @API(level = Level.ALPHA)
 public class BufferedDevice extends IODevice {
 	private BufferedReader fileReader;
 	private PrintWriter fileWriter;
 	
+	private DataInputStream input;
+	private DataOutputStream output;
+	
 	private boolean isOpen = true;
 	
-	public BufferedDevice(InputStream input, OutputStream output) {
-		fileReader = new BufferedReader(new InputStreamReader(input));
-		fileWriter = new PrintWriter(output);
+	public BufferedDevice(InputStream _input, OutputStream _output) {
+		fileReader = new BufferedReader(new InputStreamReader(_input));
+		fileWriter = new PrintWriter(_output);
+		
+		this.input = new DataInputStream(_input);
+		this.output = new DataOutputStream(_output);
 	}
 	
 	private BufferedDevice(File file) throws IOException {
@@ -90,5 +87,103 @@ public class BufferedDevice extends IODevice {
 
 	public boolean IsOpen() {
 		return isOpen;
+	}
+
+	@Override
+	public byte[] ReadAllBytes() throws DeviceReadException {
+		try {
+			return input.readAllBytes();
+		} catch (IOException ioex) {
+			throw new DeviceReadException(ioex);
+		}
+	}
+
+	@Override
+	public void WriteAllBytes(byte[] data) throws DeviceWriteException {
+		try {
+			output.write(data);
+		} catch (IOException ioex) {
+			throw new DeviceWriteException(ioex);
+		}
+	}
+
+	@Override
+	public void WriteByte(byte b) throws DeviceWriteException {
+		try {
+			output.write(b);
+		} catch (IOException ioex) {
+			throw new DeviceWriteException(ioex);
+		}
+	}
+
+	@Override
+	public void WriteShort(short s) throws DeviceWriteException {
+		try {
+			output.writeShort(s);
+		} catch (IOException ioex) {
+			throw new DeviceWriteException(ioex);
+		}
+	}
+
+	@Override
+	public void WriteInt(int i) throws DeviceWriteException {
+		try {
+			output.writeInt(i);
+		} catch (IOException ioex) {
+			throw new DeviceWriteException(ioex);
+		}
+	}
+
+	@Override
+	public void WriteLong(long l) throws DeviceWriteException {
+		try {
+			output.writeLong(l);
+		} catch (IOException ioex) {
+			throw new DeviceWriteException(ioex);
+		}
+	}
+
+	@Override
+	public byte ReadByte() throws DeviceReadException {
+		try {
+			return input.readByte();
+		} catch (EOFException eofex) {
+			throw new JuggledException(eofex);
+		} catch (IOException ioex) {
+			throw new DeviceReadException(ioex);
+		}
+	}
+
+	@Override
+	public short ReadShort() throws DeviceReadException {
+		try {
+			return input.readShort();
+		} catch (EOFException eofex) {
+			throw new JuggledException(eofex);
+		} catch (IOException ioex) {
+			throw new DeviceReadException(ioex);
+		}
+	}
+
+	@Override
+	public int ReadInt() throws DeviceReadException {
+		try {
+			return input.readInt();
+		} catch (EOFException eofex) {
+			throw new JuggledException(eofex);
+		} catch (IOException ioex) {
+			throw new DeviceReadException(ioex);
+		}
+	}
+
+	@Override
+	public long ReadLong() throws DeviceReadException {
+		try {
+			return input.readLong();
+		} catch (EOFException eofex) {
+			throw new JuggledException(eofex);
+		} catch (IOException ioex) {
+			throw new DeviceReadException(ioex);
+		}
 	}
 }

@@ -45,9 +45,11 @@ public class Tester {
 		Object instance;
 		instance = clazz.newInstance();
 		int passedMethodCounter = 0;
+		int testCounter = 0;
 		for(Method method : clazz.getDeclaredMethods()) {
 			
 			if(method.getAnnotation(Test.class) != null) {
+				testCounter++;
 				if(method.getExceptionTypes().length < 1) {
 					System.err.println("Testing Method " + method);
 					if(TestMethod(method, instance)) passedMethodCounter++;
@@ -62,7 +64,7 @@ public class Tester {
 				}
 			}
 		}
-		System.out.println(clazz.getName() + " Passed " + passedMethodCounter + " Tests...");
+		System.out.println(clazz.getName() + " Passed " + passedMethodCounter + "/" + testCounter + " Tests...");
 	}
 	
 	private static boolean TestMethod(Method method, Object instance) {

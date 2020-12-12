@@ -1,0 +1,8 @@
+language: java
+git:
+  quiet: true
+  submodules: true
+
+jobs:
+  ant CI
+

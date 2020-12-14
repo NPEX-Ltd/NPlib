@@ -18,6 +18,8 @@ public class TestingMain {
 		Tester.Test(XMLTester.class);
 		Tester.Test(AsyncTests.class);
 		if(ArgsParser.ArgsContainsFlag(args, "-net")) Tester.Test(HTTPTester.class);
+		
+		
 		Tester.Test(AsyncTests.class);
 	}
 }
